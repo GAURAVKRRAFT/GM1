@@ -4,25 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gaurav Mohapatra | Portfolio</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg-color: #0d1117;
       --text-color: #c9d1d9;
       --section-bg: #161b22;
-      --header-text: white;
+      --header-text: #ffffff;
       --accent: #58a6ff;
       --border-color: #30363d;
-      --card-hover: scale(1.02);
     }
 
     body.light {
-      --bg-color: #f2f2f2;
-      --text-color: #111;
+      --bg-color: #f3f4f6;
+      --text-color: #111827;
       --section-bg: #ffffff;
-      --header-text: #000;
-      --accent: #0066cc;
-      --border-color: #ddd;
+      --header-text: #111827;
+      --accent: #2563eb;
+      --border-color: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -30,18 +36,18 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      scroll-behavior: smooth;
-      transition: background-color 0.4s ease, color 0.4s ease;
+      transition: background-color 0.4s, color 0.4s;
     }
 
+    /* ===== HEADER ===== */
     header {
       background: linear-gradient(270deg, #ff0000, #000000, #00ffea);
       background-size: 600% 600%;
       animation: gradientShift 15s ease infinite;
-      padding: 2rem;
+      padding: 2.5rem 1rem;
       text-align: center;
-      color: var(--header-text);
       font-family: 'Orbitron', sans-serif;
+      color: var(--header-text);
     }
 
     @keyframes gradientShift {
@@ -51,34 +57,37 @@
     }
 
     header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.3rem;
+      font-size: 2.6rem;
+      margin-bottom: 0.4rem;
     }
 
     header p {
-      font-size: 1.2rem;
-      color: #ccc;
+      font-size: 1.1rem;
+      opacity: 0.9;
     }
 
+    /* ===== SECTIONS ===== */
     section {
       max-width: 900px;
       margin: 2rem auto;
       padding: 2rem;
       background-color: var(--section-bg);
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.15);
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     section:hover {
-      transform: var(--card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
 
     section h2 {
       color: var(--accent);
       border-bottom: 2px solid var(--border-color);
       padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     ul {
@@ -89,47 +98,22 @@
       margin-bottom: 0.6rem;
     }
 
-    .socials p, .contact p {
-      margin: 0.4rem 0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      color: var(--header-text);
-      background: #010409;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border-color);
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.3s, text-decoration 0.3s;
-    }
-
-    a:hover {
-      color: #00ffe1;
-      text-decoration: underline;
-    }
-
+    /* ===== COLLAPSIBLE ===== */
     .collapsible {
       background-color: #21262d;
       color: white;
       cursor: pointer;
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       width: 100%;
       border: none;
       text-align: left;
-      outline: none;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       border-radius: 6px;
-      margin-bottom: 1rem;
-      transition: background-color 0.3s ease;
+      margin-bottom: 0.8rem;
+      transition: background-color 0.3s;
     }
 
-    .active, .collapsible:hover {
+    .collapsible:hover {
       background-color: #30363d;
     }
 
@@ -137,27 +121,26 @@
       padding: 0 1rem;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out;
+      transition: max-height 0.4s ease;
       background-color: #1c2128;
       border-left: 3px solid var(--accent);
-      margin-bottom: 1rem;
     }
 
-    @media (max-width: 600px) {
-      section {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-
-      header h1 {
-        font-size: 2rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
+    body.light .content {
+      background-color: #f9fafb;
     }
 
+    /* ===== LINKS ===== */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== TOGGLE BUTTON ===== */
     .mode-toggle {
       position: fixed;
       top: 1rem;
@@ -168,46 +151,66 @@
       padding: 0.6rem 1rem;
       border-radius: 8px;
       cursor: pointer;
-      z-index: 999;
       font-size: 0.9rem;
-      transition: background 0.3s;
+      z-index: 1000;
     }
 
     .mode-toggle:hover {
       background: #30363d;
     }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+      border-top: 1px solid var(--border-color);
+      margin-top: 3rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      section {
+        margin: 1.2rem;
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-<button class="mode-toggle" onclick="toggleMode()">Toggle Dark/Light</button>
+<button class="mode-toggle" onclick="toggleMode()">Toggle Dark / Light</button>
 
 <header>
   <h1>Gaurav Mohapatra</h1>
-  <p>F1 and Football Fan | Tech Enthusiast | Gamer | Developer | Robotics | Photography</p>
+  <p>F1 & Football Fan • Tech Enthusiast • Gamer • Developer • Robotics • Photography</p>
 </header>
 
 <section>
   <h2>Education</h2>
-  <p><strong>School:</strong> DAV Public School Pokhariput</p>
+  <p><strong>School:</strong> DAV Public School, Pokhariput</p>
   <p><strong>Grade:</strong> Class X</p>
 </section>
 
 <section>
   <h2>Skills</h2>
-  <button class="collapsible">Click to Show/Hide Skills</button>
+  <button class="collapsible">Show / Hide Skills</button>
   <div class="content">
     <ul>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>QBasic</li>
+      <li>HTML & CSS</li>
       <li>Python</li>
       <li>C++</li>
-      <li>Photography</li>
-      <li>Videography</li>
+      <li>QBasic</li>
+      <li>Arduino IDE</li>
+      <li>Photography & Videography</li>
       <li>Video Editing</li>
       <li>Anchoring</li>
-      <li>Arduino IDE</li>
     </ul>
   </div>
 </section>
@@ -215,45 +218,62 @@
 <section>
   <h2>Projects</h2>
   <ul>
-    <li><strong>Magical Football</strong> A webpage thats show underrated footballers.</li>
-    <li><strong>ATR XPLORER ROVER:</strong> Rover prototype using ESP32, sensors, and motors.</li>
+    <li><strong>Magical Football:</strong> A webpage that showcases underrated footballers.</li>
+    <li><strong>ATR XPLORER Rover:</strong> ESP32-based rover using sensors and motors.</li>
     <li><strong>Sign Language Glove:</strong> Converts hand signs into digital text.</li>
-    <li><strong>GTA Vice City Inspired Game:</strong> A simplified 3D open-world game project.</li>
-    <li><strong>Motif Marketplace</strong>A marketplace that sells Odia art and craft(still under development)</li>
+    <li><strong>GTA Vice City Inspired Game:</strong> Simplified 3D open-world concept.</li>
+    <li><strong>Motif Marketplace:</strong> Platform for Odia art & crafts (under development).</li>
   </ul>
 </section>
 
 <section>
   <h2>Achievements</h2>
   <ul>
-    <li>Prize - KIIT Exhibition Science Fair (2024)</li>
-    <li>Top 5 from Audience - TCS Inquizitive Audience Winner (2024)</li>
-    <li>2nd Place in Presentation competition at Summer Innovation Camp organised by Karkhana Makerspace (2025)</li>
-        <li>Runners up in Web Designing Competition Prayas: Web Ediiton 20205 at DAV Chandrasekharpur organised by Silicon University(2025)</li>
+    <li>Prize Winner – KIIT Exhibition Science Fair (2024)</li>
+    <li>Top 5 Audience Winner – TCS InQuizitive (2024)</li>
+    <li>2nd Place – Presentation Competition, Karkhana Makerspace (2025)</li>
+    <li>Runner-up – Web Designing Competition, Prayas (2025)</li>
   </ul>
 </section>
 
-<section class="socials">
+<section>
   <h2>Socials</h2>
-  <p><a href="https://www.youtube.com/@GAURAVKRRAFT">GAURAV KRRAFT channel</a></p>
-  <p><a href="https://www.youtube.com/@GAURAVMOHAPATRA1" target="_blank">GAURAV MOHAPATRA channel</a></p>
-  <p><a href="https://sites.google.com/view/gauravkrraftcom/home" target="_blank">Website</a></p>
-  <p><a href="https://www.instagram.com/gauravkrraft/">Instagram</a></p>
-  <p><a href="https://x.com/GKrraft">X/Twitter</a></p>
-  <p><a href="https://www.reddit.com/user/GAURAVKRRAFTYT/">Reddit</a></p>
-  <p><a href="https://steamcommunity.com/profiles/76561199514423500/">Steam Profile</a></p>
+  <p><a href="https://www.youtube.com/@GAURAVKRRAFT" target="_blank">GAURAV KRRAFT (YouTube)</a></p>
+  <p><a href="https://www.youtube.com/@GAURAVMOHAPATRA1" target="_blank">GAURAV MOHAPATRA (YouTube)</a></p>
+  <p><a href="https://sites.google.com/view/gauravkrraftcom/home" target="_blank">Personal Website</a></p>
+  <p><a href="https://www.instagram.com/gauravkrraft/" target="_blank">Instagram</a></p>
+  <p><a href="https://x.com/GKrraft" target="_blank">X / Twitter</a></p>
+  <p><a href="https://www.reddit.com/user/GAURAVKRRAFTYT/" target="_blank">Reddit</a></p>
+  <p><a href="https://steamcommunity.com/profiles/76561199514423500/" target="_blank">Steam</a></p>
 </section>
 
-<section class="contact">
+<section>
   <h2>Contact</h2>
   <p><strong>Email:</strong> gauravkrraft@email.com</p>
   <p><strong>Phone:</strong> +91 9776866248</p>
 </section>
+
 <footer>
-  <p>Designed by Gaurav Mohapatra | © 2025</p>
+  Designed & Built by Gaurav Mohapatra • © 2025
 </footer>
 
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("light");
+  }
+
+  const coll = document.querySelector(".collapsible");
+  const content = document.querySelector(".content");
+
+  coll.addEventListener("click", () => {
+    coll.classList.toggle("active");
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+</script>
 
 </body>
 </html>
-
