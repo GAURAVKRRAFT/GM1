@@ -1,291 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gaurav Mohapatra | Portfolio</title>
-  <meta name="description" content="Gaurav Mohapatra's personal portfolio showcasing projects, skills, and achievements.">
-  <meta property="og:title" content="Gaurav Mohapatra | Portfolio">
-  <meta property="og:image" content="your-thumbnail.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Fira+Code&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gaurav Mohapatra | Portfolio</title>
 
-    :root {
-      --bg-color: #0d1117;
-      --text-color: #c9d1d9;
-      --section-bg: #161b22;
-      --accent: #58a6ff;
-      --header-gradient: linear-gradient(270deg, #ff0000, #000000, #00ffea);
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-    * {
-      box-sizing: border-box;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Fira+Code&display=swap');
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      scroll-behavior: smooth;
-      transition: background-color 0.3s, color 0.3s;
-    }
+:root{
+  --bg:#0d1117;
+  --card:#161b22;
+  --text:#c9d1d9;
+  --accent:#58a6ff;
+}
 
-    header {
-      background: var(--header-gradient);
-      background-size: 600% 600%;
-      animation: gradientShift 15s ease infinite;
-      padding: 2rem;
-      text-align: center;
-      color: white;
-    }
+body.light{
+  --bg:#ffffff;
+  --card:#f3f4f6;
+  --text:#111;
+  --accent:#2563eb;
+}
 
-    @keyframes gradientShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+*{
+  box-sizing:border-box;
+}
 
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      margin-bottom: 0.3rem;
-    }
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.3s ease;
+}
 
-    .typing-effect {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.2rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #fff;
-      width: 24ch;
-      animation: typing 3s steps(24), blink 0.7s step-end infinite;
-      margin: 0 auto;
-      color: #ccc;
-    }
+/* Header */
+header{
+  text-align:center;
+  padding:3rem 1rem;
+  background:linear-gradient(135deg,#111,#1f2937);
+}
 
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 24ch; }
-    }
+header h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:2.8rem;
+  margin-bottom:0.5rem;
+}
 
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
+.typing{
+  font-family:'Fira Code',monospace;
+  color:#aaa;
+  font-size:1.1rem;
+}
 
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: var(--section-bg);
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.15);
-      transition: transform 0.3s ease;
-    }
+/* Toggle Button */
+.toggle{
+  position:absolute;
+  top:20px;
+  right:20px;
+  padding:6px 14px;
+  border-radius:20px;
+  background:var(--accent);
+  border:none;
+  color:white;
+  cursor:pointer;
+}
 
-    section:hover {
-      transform: scale(1.02);
-    }
+/* Sections */
+section{
+  max-width:900px;
+  margin:2rem auto;
+  padding:2rem;
+  background:var(--card);
+  border-radius:12px;
+  transition:0.3s ease;
+}
 
-    section h2 {
-      color: var(--accent);
-      border-bottom: 2px solid #30363d;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
+section:hover{
+  transform:translateY(-6px);
+}
 
-    ul {
-      padding-left: 1.2rem;
-    }
+h2{
+  border-bottom:1px solid #30363d;
+  padding-bottom:0.5rem;
+  margin-bottom:1rem;
+  color:var(--accent);
+}
 
-    ul li {
-      margin-bottom: 0.6rem;
-    }
+/* Tech Stack */
+.tech-stack{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  font-size:2rem;
+}
 
-    .tech-stack {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+.tech-stack i{
+  transition:0.3s;
+}
 
-    .socials p, .contact p {
-      margin: 0.4rem 0;
-    }
+.tech-stack i:hover{
+  color:var(--accent);
+  transform:scale(1.2);
+}
 
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      color: white;
-      background: #010409;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      border-top: 1px solid #21262d;
-    }
+/* Collapsible */
+.collapsible{
+  background:var(--accent);
+  color:white;
+  padding:10px;
+  border:none;
+  width:100%;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:1rem;
+}
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+.content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+  padding:0 1rem;
+}
 
-    a:hover {
-      color: #00ffe1;
-      text-decoration: underline;
-    }
+.content ul{
+  padding-left:1rem;
+}
 
-    .collapsible {
-      background-color: #21262d;
-      color: white;
-      cursor: pointer;
-      padding: 1rem;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 1.1rem;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
+/* Links */
+a{
+  color:var(--accent);
+  text-decoration:none;
+}
 
-    .active, .collapsible:hover {
-      background-color: #30363d;
-    }
+a:hover{
+  text-decoration:underline;
+}
 
-    .content {
-      padding: 0 1rem;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out;
-      background-color: #1c2128;
-      border-left: 3px solid var(--accent);
-      margin-bottom: 1rem;
-    }
+/* Copy */
+.copy{
+  cursor:pointer;
+  color:var(--accent);
+}
 
-    .copy-text {
-      position: relative;
-      display: inline-block;
-      text-decoration: underline;
-      color: var(--accent);
-      cursor: pointer;
-    }
+/* Footer */
+footer{
+  text-align:center;
+  padding:1.5rem;
+  background:#010409;
+  margin-top:3rem;
+  font-size:0.9rem;
+}
 
-    .copy-text:hover::after {
-      content: "Copied!";
-      position: absolute;
-      top: -1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: var(--bg-color);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 600px) {
-      section {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-
-      header h1 {
-        font-size: 2rem;
-      }
-
-      .typing-effect {
-        font-size: 1rem;
-        width: 20ch;
-        animation: typing 2s steps(20), blink 0.7s step-end infinite;
-      }
-    }
-  </style>
+/* Responsive */
+@media(max-width:600px){
+  header h1{
+    font-size:2rem;
+  }
+  section{
+    margin:1rem;
+    padding:1.5rem;
+  }
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>Gaurav Mohapatra</h1>
-    <div class="typing-effect">Tech Enthusiast | Developer</div>
-  </header>
 
-  <section>
-    <h2>Tech Stack</h2>
-    <div class="tech-stack">
-      <i class="fab fa-html5" title="HTML5"></i>
-      <i class="fab fa-css3-alt" title="CSS3"></i>
-      <i class="fab fa-python" title="Python"></i>
-      <i class="fab fa-cuttlefish" title="C++"></i>
-      <i class="fab fa-arduino" title="Arduino"></i>
-      <i class="fab fa-js" title="JavaScript"></i>
-    </div>
-  </section>
+<button class="toggle" onclick="toggleMode()">Toggle Mode</button>
 
-  <section>
-    <h2>Education</h2>
-    <p><strong>School:</strong> DAV Public School Pokhariput</p>
-    <p><strong>Grade:</strong> Class X</p>
-  </section>
+<header>
+<h1>Gaurav Mohapatra</h1>
+<div class="typing">Tech Enthusiast | Developer</div>
+</header>
 
-  <section>
-    <h2>Skills</h2>
-    <button class="collapsible">Click to Show/Hide Skills</button>
-    <div class="content">
-      <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>QBasic</li>
-        <li>Python</li>
-        <li>C++</li>
-        <li>Photography</li>
-        <li>Videography</li>
-        <li>Video Editing</li>
-        <li>Anchoring</li>
-        <li>Arduino IDE</li>
-      </ul>
-    </div>
-  </section>
+<section>
+<h2>Tech Stack</h2>
+<div class="tech-stack">
+<i class="fab fa-html5"></i>
+<i class="fab fa-css3-alt"></i>
+<i class="fab fa-python"></i>
+<i class="fab fa-js"></i>
+<i class="fab fa-arduino"></i>
+</div>
+</section>
 
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>F1 Stats Visualizer:</strong> A webpage to show Formula 1 standings using HTML tables and JavaScript.</li>
-      <li><strong>ATR XPLORER ROVER:</strong> Rover prototype using ESP32, sensors, and motors.</li>
-      <li><strong>Sign Language Glove:</strong> Converts hand signs into digital text.</li>
-      <li><strong>GTA Vice City Inspired Game:</strong> A simplified 3D open-world game project.</li>
-    </ul>
-  </section>
+<section>
+<h2>Education</h2>
+<p><strong>School:</strong> DAV Public School Pokhariput</p>
+<p><strong>Grade:</strong> Class X</p>
+</section>
 
-  <section>
-    <h2>Achievements</h2>
-    <ul>
-      <li>3rd - KIIT Exhibition Science Fair (2024)</li>
-      <li>Top 5 from Audience - TCS Inquizitive Audience Winner (2024)</li>
-    </ul>
-  </section>
+<section>
+<h2>Skills</h2>
+<button class="collapsible">Show Skills</button>
+<div class="content">
+<ul>
+<li>HTML, CSS, JavaScript</li>
+<li>Python, C++</li>
+<li>Arduino IDE</li>
+<li>Photography & Videography</li>
+<li>Video Editing</li>
+<li>Anchoring</li>
+</ul>
+</div>
+</section>
 
-  <section class="socials">
-    <h2>Socials</h2>
-    <p><a href="https://www.youtube.com/@GAURAVKRRAFT">GAURAV KRRAFT channel</a></p>
-    <p><a href="https://www.youtube.com/@GAURAVMOHAPATRA1" target="_blank">GAURAV MOHAPATRA channel</a></p>
-    <p><a href="https://sites.google.com/view/gauravkrraftcom/home" target="_blank">Website</a></p>
-    <p><a href="https://www.instagram.com/gauravkrraft/">Instagram</a></p>
-    <p><a href="https://x.com/GKrraft">X/Twitter</a></p>
-    <p><a href="https://www.reddit.com/user/GAURAVKRRAFTYT/">Reddit</a></p>
-  </section>
+<section>
+<h2>Projects</h2>
+<ul>
+<li><strong>F1 Stats Visualizer:</strong> Standings webpage using JS.</li>
+<li><strong>ATR XPLORER ROVER:</strong> ESP32 rover prototype.</li>
+<li><strong>Sign Language Glove:</strong> Converts gestures to text.</li>
+<li><strong>3D Open World Game:</strong> GTA-inspired project.</li>
+<li><strong>Magical Football:</strong>A website full of famous and underrated footballers</li>
+<li><strong>Kalinga Agro Tool Rubber Tapping Machine:</strong>A 3D printed from the scratch rubber tapping machine built in house</li>
+</ul>
+</section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <p><strong>Email:</strong> gauravkrraft@email.com</p>
-    <p><strong>Phone:</strong> <span class="copy-text">+91 9776866248</span></p>
-  </section>
+<section>
+<h2>Achievements</h2>
+<ul>
+<li>Striver Prize - KIIT Science Fair (2024)</li>
+<li>Top 5 Audience - TCS Inquizitive (2024)</li>
+<li>2nd place in category of Innovation- Silicon Prayas Web Edition 2025</li>
+<li>3rd in School Level IIO 2024-25</li>
+</ul>
+</section>
 
-  <footer>
-    <p>Designed by Gaurav Mohapatra | © 2025</p>
-  </footer>
+<section>
+<h2>Socials</h2>
+<p><a href="https://www.youtube.com/@GAURAVKRRAFT">YouTube 1</a></p>
+<p><a href="https://www.youtube.com/@GAURAVMOHAPATRA1">YouTube 2</a></p>
+<p><a href="https://www.instagram.com/gauravkrraft/">Instagram</a></p>
+<p><a href="https://x.com/GKrraft">X / Twitter</a></p>
+<p><a href="https://www.reddit.com/user/GAURAVKRRAFTYT/">Reddit</a></p>
+</section>
+
+<section>
+<h2>Contact</h2>
+<p><strong>Email:</strong> gauravkrraft@email.com</p>
+<p><strong>Phone:</strong> <span class="copy" onclick="copyPhone()">+91 9776866248</span></p>
+</section>
+
+<footer>
+Designed by Gaurav Mohapatra | © 2026
+</footer>
+
+<script>
+/* Dark Mode */
+function toggleMode(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",
+    document.body.classList.contains("light") ? "light" : "dark");
+}
+
+if(localStorage.getItem("theme")==="light"){
+  document.body.classList.add("light");
+}
+
+/* Collapsible */
+const coll=document.querySelector(".collapsible");
+const content=document.querySelector(".content");
+
+coll.addEventListener("click",function(){
+  if(content.style.maxHeight){
+    content.style.maxHeight=null;
+    coll.innerText="Show Skills";
+  }else{
+    content.style.maxHeight=content.scrollHeight+"px";
+    coll.innerText="Hide Skills";
+  }
+});
+
+/* Copy Phone */
+function copyPhone(){
+  navigator.clipboard.writeText("+919776866248");
+  alert("Phone number copied!");
+}
+</script>
+
 </body>
 </html>
