@@ -1,168 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Gaurav Mohapatra | Portfolio</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Fira+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fira+Code&display=swap');
 
 :root{
-  --bg:#0d1117;
-  --card:#161b22;
-  --text:#c9d1d9;
-  --accent:#58a6ff;
+  --bg:#020617;
+  --bg-alt:#020617;
+  --card:rgba(15,23,42,0.85);
+  --card-soft:rgba(15,23,42,0.6);
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#38bdf8;
+  --accent-soft:rgba(56,189,248,0.25);
+  --border:rgba(148,163,184,0.25);
+  --radius:18px;
+  --blur:18px;
+  --shadow:0 18px 45px rgba(15,23,42,0.85);
 }
 
 body.light{
-  --bg:#ffffff;
-  --card:#f3f4f6;
-  --text:#111;
+  --bg:#f3f4f6;
+  --bg-alt:#e5e7eb;
+  --card:rgba(255,255,255,0.9);
+  --card-soft:rgba(255,255,255,0.75);
+  --text:#0f172a;
+  --muted:#6b7280;
   --accent:#2563eb;
+  --accent-soft:rgba(37,99,235,0.12);
+  --border:rgba(148,163,184,0.35);
+  --shadow:0 18px 45px rgba(15,23,42,0.12);
 }
 
-*{
+*,
+*::before,
+*::after{
   box-sizing:border-box;
 }
 
 body{
   margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:var(--bg);
+  min-height:100vh;
+  font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:
+    radial-gradient(circle at top, #0f172a 0, #020617 50%, #000 100%);
   color:var(--text);
-  transition:0.3s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:1.5rem;
+  transition:background 0.4s ease,color 0.4s ease;
 }
 
-/* Header */
+/* Global layout */
+.main-shell{
+  width:100%;
+  max-width:980px;
+  background:linear-gradient(135deg,rgba(148,163,184,0.12),rgba(15,23,42,0.8));
+  border-radius:28px;
+  padding:1px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.main-inner{
+  background:radial-gradient(circle at top left,rgba(56,189,248,0.08),transparent 55%),
+             radial-gradient(circle at bottom right,rgba(129,140,248,0.18),transparent 60%),
+             var(--bg-alt);
+  border-radius:26px;
+  padding:2.2rem clamp(1.6rem,3vw,2.6rem);
+  backdrop-filter:blur(24px);
+  position:relative;
+}
+
+/* Animated gradient orb */
+.orb{
+  position:absolute;
+  inset:auto -120px -120px auto;
+  width:220px;
+  height:220px;
+  background:radial-gradient(circle at 30% 30%,rgba(56,189,248,0.9),transparent 60%);
+  opacity:0.25;
+  filter:blur(4px);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  animation:floatOrb 11s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb{
+  0%{transform:translate3d(0,0,0) scale(1);}
+  100%{transform:translate3d(40px,-40px,0) scale(1.15);}
+}
+
+/* Top bar */
+.top-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+  margin-bottom:2rem;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:0.85rem;
+}
+
+.brand-avatar{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  background:radial-gradient(circle at 30% 30%,#38bdf8,#0f172a);
+  border:1px solid rgba(148,163,184,0.4);
+  position:relative;
+  overflow:hidden;
+}
+
+.brand-avatar::after{
+  content:"GM";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.9rem;
+  font-weight:700;
+  color:#e5e7eb;
+  letter-spacing:0.06em;
+}
+
+.brand-meta{
+  display:flex;
+  flex-direction:column;
+  gap:0.1rem;
+}
+
+.brand-meta span:first-child{
+  font-weight:600;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  font-size:0.75rem;
+  color:var(--muted);
+}
+
+.brand-meta span:last-child{
+  font-size:0.8rem;
+  color:var(--muted);
+}
+
+/* Toggle */
+.toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:0.45rem;
+  padding:0.35rem 0.9rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.55);
+  background:rgba(15,23,42,0.7);
+  color:var(--text);
+  cursor:pointer;
+  font-size:0.78rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  backdrop-filter:blur(12px);
+  transition:background 0.25s ease,transform 0.2s ease,border-color 0.25s ease;
+}
+
+.toggle i{
+  font-size:0.9rem;
+}
+
+.toggle:hover{
+  background:rgba(15,23,42,0.95);
+  transform:translateY(-1px);
+  border-color:var(--accent);
+}
+
+/* Header / Hero */
 header{
-  text-align:center;
-  padding:3rem 1rem;
-  background:linear-gradient(135deg,#111,#1f2937);
+  display:grid;
+  grid-template-columns:minmax(0,1.8fr) minmax(0,1.3fr);
+  gap:2rem;
+  align-items:center;
+  margin-bottom:2.4rem;
+}
+
+.hero-intro-label{
+  display:inline-flex;
+  align-items:center;
+  gap:0.45rem;
+  padding:0.25rem 0.75rem;
+  border-radius:999px;
+  background:rgba(15,23,42,0.88);
+  border:1px solid rgba(148,163,184,0.4);
+  color:var(--muted);
+  font-size:0.8rem;
+}
+
+.hero-intro-label-dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#4ade80;
+  box-shadow:0 0 12px rgba(74,222,128,0.85);
 }
 
 header h1{
-  font-family:'Orbitron',sans-serif;
-  font-size:2.8rem;
-  margin-bottom:0.5rem;
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  font-size:clamp(2.15rem,4vw,2.9rem);
+  margin:0.8rem 0 0.6rem;
+  letter-spacing:-0.03em;
 }
 
-.typing{
+.hero-sub{
   font-family:'Fira Code',monospace;
-  color:#aaa;
-  font-size:1.1rem;
+  font-size:0.95rem;
+  color:var(--muted);
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.4rem;
 }
 
-/* Toggle Button */
-.toggle{
-  position:absolute;
-  top:20px;
-  right:20px;
-  padding:6px 14px;
-  border-radius:20px;
-  background:var(--accent);
-  border:none;
-  color:white;
-  cursor:pointer;
-}
-
-/* Sections */
-section{
-  max-width:900px;
-  margin:2rem auto;
-  padding:2rem;
-  background:var(--card);
-  border-radius:12px;
-  transition:0.3s ease;
-}
-
-section:hover{
-  transform:translateY(-6px);
-}
-
-h2{
-  border-bottom:1px solid #30363d;
-  padding-bottom:0.5rem;
-  margin-bottom:1rem;
+.hero-sub span.role{
   color:var(--accent);
 }
 
-/* Tech Stack */
+.hero-sub span.pipe{
+  opacity:0.65;
+}
+
+.typing{
+  position:relative;
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:2px solid var(--accent);
+  animation:typing 4.2s steps(32,end) infinite,blink 0.9s step-end infinite;
+}
+
+@keyframes typing{
+  0%{width:0;}
+  35%{width:100%;}
+  85%{width:100%;}
+  100%{width:0;}
+}
+
+@keyframes blink{
+  0%,100%{border-color:transparent;}
+  50%{border-color:var(--accent);}
+}
+
+.hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.7rem;
+  margin-top:1.1rem;
+  font-size:0.82rem;
+  color:var(--muted);
+}
+
+.hero-meta-pill{
+  padding:0.25rem 0.7rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.35);
+  background:rgba(15,23,42,0.75);
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.9rem;
+  margin-top:1.6rem;
+}
+
+.btn-primary,
+.btn-ghost{
+  border-radius:999px;
+  padding:0.6rem 1.4rem;
+  font-size:0.86rem;
+  border:1px solid transparent;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:0.55rem;
+  text-decoration:none;
+  transition:transform 0.22s ease,box-shadow 0.22s ease,background 0.22s ease,border-color 0.22s ease,color 0.22s ease;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),#6366f1);
+  color:#0b1120;
+  box-shadow:0 14px 28px rgba(56,189,248,0.45);
+}
+
+.btn-primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 18px 40px rgba(56,189,248,0.55);
+}
+
+.btn-ghost{
+  background:rgba(15,23,42,0.75);
+  color:var(--text);
+  border-color:rgba(148,163,184,0.4);
+}
+
+.btn-ghost:hover{
+  transform:translateY(-1px);
+  background:rgba(15,23,42,0.92);
+  border-color:var(--accent);
+}
+
+/* Hero side card */
+.hero-side{
+  justify-self:end;
+}
+
+.hero-card{
+  position:relative;
+  border-radius:24px;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,var(--card),var(--card-soft));
+  padding:1.4rem 1.6rem;
+  backdrop-filter:blur(var(--blur));
+  overflow:hidden;
+}
+
+.hero-card::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at 0 0,rgba(56,189,248,0.14),transparent 60%);
+  opacity:0.7;
+  mix-blend-mode:screen;
+  animation:cardGlow 11s ease-in-out infinite alternate;
+}
+
+@keyframes cardGlow{
+  0%{transform:translate3d(0,0,0);}
+  100%{transform:translate3d(20px,10px,0);}
+}
+
+.hero-card-inner{
+  position:relative;
+  z-index:2;
+}
+
+.hero-tag{
+  font-size:0.75rem;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:var(--muted);
+  margin-bottom:0.4rem;
+}
+
+.hero-highlight{
+  font-size:0.9rem;
+  margin-bottom:0.9rem;
+}
+
+.hero-highlight strong{
+  color:var(--accent);
+}
+
+.hero-stats{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  margin-top:0.7rem;
+}
+
+.hero-stat{
+  display:flex;
+  flex-direction:column;
+  gap:0.1rem;
+}
+
+.hero-stat span:first-child{
+  font-size:1rem;
+  font-weight:600;
+}
+
+.hero-stat span:last-child{
+  font-size:0.72rem;
+  color:var(--muted);
+}
+
+/* Section base */
+section{
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--card),var(--card-soft));
+  border:1px solid var(--border);
+  padding:1.2rem 1.4rem 1.4rem;
+  margin-bottom:1.1rem;
+  backdrop-filter:blur(var(--blur));
+  position:relative;
+  overflow:hidden;
+  transform-origin:center;
+  transition:transform 0.26s ease,box-shadow 0.26s ease,background 0.26s ease,border-color 0.26s ease;
+}
+
+section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:0;
+  background:radial-gradient(circle at top left,var(--accent-soft),transparent 60%);
+  transition:opacity 0.3s ease;
+  pointer-events:none;
+}
+
+section:hover{
+  transform:translateY(-4px) translateZ(0);
+  box-shadow:0 18px 40px rgba(15,23,42,0.75);
+  border-color:rgba(148,163,184,0.6);
+}
+
+section:hover::before{
+  opacity:1;
+}
+
+.section-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0.75rem;
+  margin-bottom:0.85rem;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+}
+
+.section-title h2{
+  font-size:0.95rem;
+  text-transform:uppercase;
+  letter-spacing:0.11em;
+  margin:0;
+  color:var(--muted);
+}
+
+.section-tag{
+  font-size:0.72rem;
+  padding:0.15rem 0.5rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.4);
+  color:var(--muted);
+}
+
+/* Tech stack icons */
 .tech-stack{
   display:flex;
-  gap:1rem;
+  gap:0.85rem;
   flex-wrap:wrap;
-  justify-content:center;
-  font-size:2rem;
+  font-size:1.4rem;
+  margin-top:0.4rem;
 }
 
 .tech-stack i{
-  transition:0.3s;
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  background:rgba(15,23,42,0.8);
+  border:1px solid rgba(148,163,184,0.3);
+  color:var(--muted);
+  transition:transform 0.22s ease,box-shadow 0.22s ease,color 0.22s ease,border-color 0.22s ease,background 0.22s ease;
 }
 
 .tech-stack i:hover{
   color:var(--accent);
-  transform:scale(1.2);
+  border-color:var(--accent);
+  background:rgba(15,23,42,1);
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 10px 24px rgba(56,189,248,0.35);
 }
 
-/* Collapsible */
+/* Simple rows */
+.row{
+  margin-top:0.35rem;
+  font-size:0.9rem;
+  color:var(--muted);
+}
+
+.row strong{
+  color:var(--text);
+}
+
+/* Skills collapsible */
 .collapsible{
-  background:var(--accent);
-  color:white;
-  padding:10px;
-  border:none;
-  width:100%;
-  border-radius:6px;
+  background:transparent;
+  color:var(--text);
+  padding:0.55rem 0.85rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.5);
   cursor:pointer;
-  font-size:1rem;
+  font-size:0.82rem;
+  display:inline-flex;
+  align-items:center;
+  gap:0.45rem;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:0.45rem;
+  background:rgba(15,23,42,0.8);
+  transition:background 0.2s ease,border-color 0.2s ease,transform 0.2s ease;
+}
+
+.collapsible i{
+  transition:transform 0.2s ease;
+}
+
+.collapsible.active i{
+  transform:rotate(90deg);
+}
+
+.collapsible:hover{
+  background:rgba(15,23,42,0.98);
+  border-color:var(--accent);
+  transform:translateY(-1px);
 }
 
 .content{
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.4s ease;
-  padding:0 1rem;
+  transition:max-height 0.38s ease;
+}
+
+.content-inner{
+  padding-top:0.3rem;
 }
 
 .content ul{
+  padding-left:1.1rem;
+  margin:0.3rem 0 0;
+  list-style:none;
+}
+
+.content li{
+  position:relative;
   padding-left:1rem;
+  margin:0.15rem 0;
+  font-size:0.86rem;
+  color:var(--muted);
 }
 
-/* Links */
-a{
-  color:var(--accent);
+.content li::before{
+  content:"";
+  width:5px;
+  height:5px;
+  border-radius:999px;
+  background:var(--accent);
+  position:absolute;
+  left:0;
+  top:0.55rem;
+}
+
+/* Projects & Achievements */
+.list{
+  list-style:none;
+  padding-left:0;
+  margin:0.3rem 0 0;
+}
+
+.list-item{
+  padding:0.4rem 0.05rem;
+  font-size:0.86rem;
+  color:var(--muted);
+}
+
+.list-item strong{
+  color:var(--text);
+}
+
+/* Socials */
+.socials-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.55rem;
+  margin-top:0.35rem;
+}
+
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  gap:0.45rem;
+  font-size:0.82rem;
+  padding:0.38rem 0.75rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.45);
+  color:var(--muted);
   text-decoration:none;
+  background:rgba(15,23,42,0.88);
+  transition:background 0.22s ease,transform 0.22s ease,border-color 0.22s ease,color 0.22s ease,box-shadow 0.22s ease;
 }
 
-a:hover{
-  text-decoration:underline;
+.social-link i{
+  font-size:0.9rem;
 }
 
-/* Copy */
+.social-link:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+  background:rgba(15,23,42,1);
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(15,23,42,0.9);
+}
+
+/* Contact */
 .copy{
   cursor:pointer;
   color:var(--accent);
+  position:relative;
+}
+
+.copy::after{
+  content:"Click to copy";
+  position:absolute;
+  left:0;
+  top:110%;
+  font-size:0.7rem;
+  background:rgba(15,23,42,0.95);
+  padding:0.18rem 0.4rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.4);
+  color:var(--muted);
+  opacity:0;
+  transform:translateY(4px);
+  pointer-events:none;
+  transition:opacity 0.18s ease,transform 0.18s ease;
+}
+
+.copy:hover::after{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Toast */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:1.6rem;
+  transform:translateX(-50%) translateY(20px);
+  padding:0.55rem 1rem;
+  border-radius:999px;
+  background:rgba(15,23,42,0.96);
+  border:1px solid rgba(148,163,184,0.6);
+  color:var(--muted);
+  font-size:0.8rem;
+  opacity:0;
+  pointer-events:none;
+  backdrop-filter:blur(14px);
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  z-index:50;
+  transition:opacity 0.24s ease,transform 0.24s ease;
+}
+
+.toast.visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 /* Footer */
 footer{
   text-align:center;
-  padding:1.5rem;
-  background:#010409;
-  margin-top:3rem;
-  font-size:0.9rem;
+  font-size:0.78rem;
+  color:var(--muted);
+  margin-top:1.3rem;
 }
 
 /* Responsive */
-@media(max-width:600px){
-  header h1{
-    font-size:2rem;
+@media(max-width:800px){
+  body{
+    padding:1rem;
   }
-  section{
-    margin:1rem;
-    padding:1.5rem;
+  header{
+    grid-template-columns:1fr;
+  }
+  .hero-side{
+    justify-self:stretch;
+  }
+}
+
+@media(max-width:540px){
+  .main-inner{
+    padding:1.5rem 1.3rem;
+  }
+  .top-bar{
+    flex-direction:row-reverse;
+    align-items:flex-start;
+  }
+  .brand-meta span:last-child{
+    max-width:150px;
   }
 }
 </style>
@@ -170,122 +711,312 @@ footer{
 
 <body>
 
-<button class="toggle" onclick="toggleMode()">Toggle Mode</button>
+<div class="main-shell">
+  <div class="main-inner">
+    <div class="orb"></div>
 
-<header>
-<h1>Gaurav Mohapatra</h1>
-<div class="typing">Tech Enthusiast | Developer</div>
-</header>
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="brand">
+        <div class="brand-avatar"></div>
+        <div class="brand-meta">
+          <span>Portfolio</span>
+          <span>Gaurav Mohapatra &bull; Bhubaneswar, IN</span>
+        </div>
+      </div>
 
-<section>
-<h2>Tech Stack</h2>
-<div class="tech-stack">
-<i class="fab fa-html5"></i>
-<i class="fab fa-css3-alt"></i>
-<i class="fab fa-python"></i>
-<i class="fab fa-js"></i>
-<i class="fab fa-arduino"></i>
+      <button class="toggle" onclick="toggleMode()">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+        <span>Toggle theme</span>
+      </button>
+    </div>
+
+    <!-- Hero -->
+    <header>
+      <div>
+        <div class="hero-intro-label">
+          <span class="hero-intro-label-dot"></span>
+          <span>Student • Builder • Creator</span>
+        </div>
+
+        <h1>Gaurav Mohapatra</h1>
+
+        <div class="hero-sub">
+          <span class="role">Tech Enthusiast</span>
+          <span class="pipe">|</span>
+          <span class="typing">Developer • Maker • Problem Solver</span>
+        </div>
+
+        <div class="hero-meta">
+          <span class="hero-meta-pill">Class X · DAV Public School, Pokhariput</span>
+          <span class="hero-meta-pill">Hardware, web, and creativity in one place</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">
+            <i class="fa-solid fa-rocket"></i>
+            <span>View projects</span>
+          </a>
+          <a href="#contact" class="btn-ghost">
+            <i class="fa-regular fa-envelope"></i>
+            <span>Contact</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-tag">Snapshot</div>
+            <div class="hero-highlight">
+              Building from <strong>robotics</strong> to <strong>web</strong>, with a focus on learning fast and shipping useful things.
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span>6+</span>
+                <span>End‑to‑end projects</span>
+              </div>
+              <div class="hero-stat">
+                <span>Multi‑disc.</span>
+                <span>Code • Hardware • Art</span>
+              </div>
+              <div class="hero-stat">
+                <span>2024‑26</span>
+                <span>Active achievements</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tech Stack -->
+    <section id="tech">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Tech stack</h2>
+        </div>
+        <span class="section-tag">Tools I work with</span>
+      </div>
+      <div class="tech-stack">
+        <i class="fab fa-html5" title="HTML5"></i>
+        <i class="fab fa-css3-alt" title="CSS3"></i>
+        <i class="fab fa-js" title="JavaScript"></i>
+        <i class="fab fa-python" title="Python"></i>
+        <i class="fab fa-arduino" title="Arduino / ESP32"></i>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Education</h2>
+        </div>
+        <span class="section-tag">Currently in school</span>
+      </div>
+      <div class="row">
+        <strong>School:</strong> DAV Public School, Pokhariput
+      </div>
+      <div class="row">
+        <strong>Grade:</strong> Class X
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Skills</h2>
+        </div>
+        <span class="section-tag">What I use to build</span>
+      </div>
+
+      <button class="collapsible">
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Show skills</span>
+      </button>
+
+      <div class="content">
+        <div class="content-inner">
+          <ul>
+            <li>HTML, CSS, JavaScript</li>
+            <li>Python, C++</li>
+            <li>Arduino IDE & microcontroller prototyping</li>
+            <li>Photography & videography</li>
+            <li>Video editing</li>
+            <li>Anchoring & public speaking</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Projects</h2>
+        </div>
+        <span class="section-tag">Built & shipped</span>
+      </div>
+      <ul class="list">
+        <li class="list-item">
+          <strong>ATR XPLORER ROVER:</strong> ESP32 rover prototype.
+        </li>
+        <li class="list-item">
+          <strong>Sign Language Glove:</strong> Converts gestures to text.
+        </li>
+        <li class="list-item">
+          <strong>3D Open World Game:</strong> GTA‑inspired project.
+        </li>
+        <li class="list-item">
+          <strong>Magical Football:</strong> A website full of famous and underrated footballers.
+        </li>
+        <li class="list-item">
+          <strong>Kalinga Agro Tool Rubber Tapping Machine:</strong> 3D‑printed rubber tapping machine built from scratch.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Achievements</h2>
+        </div>
+        <span class="section-tag">Recent highlights</span>
+      </div>
+      <ul class="list">
+        <li class="list-item">Striver Prize – KIIT Science Fair (2024)</li>
+        <li class="list-item">Top 5 Audience – TCS Inquizitive (2024)</li>
+        <li class="list-item">2nd place (Innovation) – Silicon Prayas Web Edition 2025</li>
+        <li class="list-item">3rd in school level IIO 2024‑25</li>
+        <li class="list-item">2nd in school level ICSO 2025‑26</li>
+        <li class="list-item">Silver award – 91st Future Star Artist National Art Exhibition & Competition (Manikarnika Art Gallery)</li>
+        <li class="list-item">Top 200 artwork – IAC (International Art Contest) Season 18</li>
+      </ul>
+    </section>
+
+    <!-- Socials -->
+    <section id="socials">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Socials</h2>
+        </div>
+        <span class="section-tag">Find me online</span>
+      </div>
+      <div class="socials-grid">
+        <a href="https://www.youtube.com/@GAURAVKRRAFT" class="social-link" target="_blank" rel="noopener">
+          <i class="fab fa-youtube"></i>
+          <span>YouTube 1</span>
+        </a>
+        <a href="https://www.youtube.com/@GAURAVMOHAPATRA1" class="social-link" target="_blank" rel="noopener">
+          <i class="fab fa-youtube"></i>
+          <span>YouTube 2</span>
+        </a>
+        <a href="https://www.instagram.com/gauravkrraft/" class="social-link" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="https://x.com/GKrraft" class="social-link" target="_blank" rel="noopener">
+          <i class="fab fa-x-twitter"></i>
+          <span>X / Twitter</span>
+        </a>
+        <a href="https://www.reddit.com/user/GAURAVKRRAFTYT/" class="social-link" target="_blank" rel="noopener">
+          <i class="fab fa-reddit-alien"></i>
+          <span>Reddit</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Contact</h2>
+        </div>
+        <span class="section-tag">Let’s collaborate</span>
+      </div>
+      <div class="row">
+        <strong>Email:</strong> <a href="mailto:gauravkrraft@email.com" style="color:var(--accent);text-decoration:none;">gauravkrraft@email.com</a>
+      </div>
+      <div class="row">
+        <strong>Phone:</strong>
+        <span class="copy" onclick="copyPhone()">+91 9776866248</span>
+      </div>
+    </section>
+
+    <footer>
+      Designed by Gaurav Mohapatra · © 2026
+    </footer>
+  </div>
 </div>
-</section>
 
-<section>
-<h2>Education</h2>
-<p><strong>School:</strong> DAV Public School Pokhariput</p>
-<p><strong>Grade:</strong> Class X</p>
-</section>
-
-<section>
-<h2>Skills</h2>
-<button class="collapsible">Show Skills</button>
-<div class="content">
-<ul>
-<li>HTML, CSS, JavaScript</li>
-<li>Python, C++</li>
-<li>Arduino IDE</li>
-<li>Photography & Videography</li>
-<li>Video Editing</li>
-<li>Anchoring</li>
-</ul>
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check" style="color:#4ade80;"></i>
+  <span>Phone number copied to clipboard</span>
 </div>
-</section>
-
-<section>
-<h2>Projects</h2>
-<ul>
-<li><strong>ATR XPLORER ROVER:</strong> ESP32 rover prototype.</li>
-<li><strong>Sign Language Glove:</strong> Converts gestures to text.</li>
-<li><strong>3D Open World Game:</strong> GTA-inspired project.</li>
-<li><strong>Magical Football:</strong>A website full of famous and underrated footballers</li>
-<li><strong>Kalinga Agro Tool Rubber Tapping Machine:</strong>A 3D printed from the scratch rubber tapping machine built in house</li>
-</ul>
-</section>
-
-<section>
-<h2>Achievements</h2>
-<ul>
-<li>Striver Prize - KIIT Science Fair (2024)</li>
-<li>Top 5 Audience - TCS Inquizitive (2024)</li>
-<li>2nd place in category of Innovation- Silicon Prayas Web Edition 2025</li>
-<li>3rd in School Level IIO 2024-25</li>
-<li>2nd in School Level ICSO 2025-26</li>
-<li>Silver awardee winner in 91st Future Star artist national art exbhition and competition by Manikarnika Art Gallery</li>
-<li>Top 200 artowrk in IAC(International Art Contest) Season 18</li>
-</ul>
-</section>
-
-<section>
-<h2>Socials</h2>
-<p><a href="https://www.youtube.com/@GAURAVKRRAFT">YouTube 1</a></p>
-<p><a href="https://www.youtube.com/@GAURAVMOHAPATRA1">YouTube 2</a></p>
-<p><a href="https://www.instagram.com/gauravkrraft/">Instagram</a></p>
-<p><a href="https://x.com/GKrraft">X / Twitter</a></p>
-<p><a href="https://www.reddit.com/user/GAURAVKRRAFTYT/">Reddit</a></p>
-</section>
-
-<section>
-<h2>Contact</h2>
-<p><strong>Email:</strong> gauravkrraft@email.com</p>
-<p><strong>Phone:</strong> <span class="copy" onclick="copyPhone()">+91 9776866248</span></p>
-</section>
-
-<footer>
-Designed by Gaurav Mohapatra | © 2026
-</footer>
 
 <script>
-/* Dark Mode */
-function toggleMode(){
-  document.body.classList.toggle("light");
-  localStorage.setItem("theme",
-    document.body.classList.contains("light") ? "light" : "dark");
-}
-
-if(localStorage.getItem("theme")==="light"){
-  document.body.classList.add("light");
-}
-
-/* Collapsible */
-const coll=document.querySelector(".collapsible");
-const content=document.querySelector(".content");
-
-coll.addEventListener("click",function(){
-  if(content.style.maxHeight){
-    content.style.maxHeight=null;
-    coll.innerText="Show Skills";
+/* Theme toggle with persistence */
+function applyTheme(theme){
+  if(theme === "light"){
+    document.body.classList.add("light");
   }else{
-    content.style.maxHeight=content.scrollHeight+"px";
-    coll.innerText="Hide Skills";
+    document.body.classList.remove("light");
+  }
+}
+
+function toggleMode(){
+  const nextTheme = document.body.classList.contains("light") ? "dark" : "light";
+  applyTheme(nextTheme);
+  localStorage.setItem("theme", nextTheme);
+}
+
+const savedTheme = localStorage.getItem("theme") || "dark";
+applyTheme(savedTheme);
+
+/* Skills collapsible */
+const coll = document.querySelector(".collapsible");
+const content = document.querySelector(".content");
+
+coll.addEventListener("click", function () {
+  const isOpen = content.style.maxHeight;
+  if (isOpen) {
+    content.style.maxHeight = null;
+    coll.classList.remove("active");
+    coll.querySelector("span").innerText = "Show skills";
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+    coll.classList.add("active");
+    coll.querySelector("span").innerText = "Hide skills";
   }
 });
 
-/* Copy Phone */
+/* Copy phone with toast */
+function showToast(){
+  const toast = document.getElementById("toast");
+  toast.classList.add("visible");
+  setTimeout(() => {
+    toast.classList.remove("visible");
+  }, 1700);
+}
+
 function copyPhone(){
-  navigator.clipboard.writeText("+919776866248");
-  alert("Phone number copied!");
+  const number = "+919776866248";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(number).then(showToast);
+  }else{
+    const temp = document.createElement("input");
+    temp.value = number;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+    showToast();
+  }
 }
 </script>
 
 </body>
 </html>
-
-
