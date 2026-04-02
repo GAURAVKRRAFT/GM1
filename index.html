@@ -1,205 +1,183 @@
+<!-- Ultra-enhanced version: same content, upgraded visuals, smoother animations, micro-interactions -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Gaurav Mohapatra | Portfolio</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fira+Code&display=swap');
 
 :root{
   --bg:#020617;
-  --glass:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.15);
+  --card:rgba(15,23,42,0.75);
   --text:#e5e7eb;
-  --muted:#94a3b8;
+  --muted:#9ca3af;
   --accent:#38bdf8;
-  --accent2:#8b5cf6;
+  --border:rgba(148,163,184,0.25);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box}
 
 body{
-  font-family:'Inter',sans-serif;
-  background: radial-gradient(circle at 20% 20%, #0f172a, #020617 60%);
+  margin:0;
+  font-family:'Space Grotesk',sans-serif;
+  background:radial-gradient(circle at top,#0f172a,#020617 60%,#000);
   color:var(--text);
-  padding:30px;
-}
-
-.container{
-  max-width:1100px;
-  margin:auto;
-}
-
-/* NAV */
-.nav{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:40px;
+  justify-content:center;
+  padding:2rem 1rem;
 }
 
-.logo{
-  font-family:'Space Grotesk';
-  font-weight:700;
-  font-size:18px;
-  letter-spacing:1px;
+.main{
+  max-width:1000px;
+  width:100%;
+}
+
+section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:1.5rem;
+  margin-bottom:1.2rem;
+  backdrop-filter:blur(18px);
+  transition:all .3s ease;
+}
+
+section:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+h1{
+  font-size:2.8rem;
+  margin:0.5rem 0;
+}
+
+.sub{
+  font-family:'Fira Code',monospace;
+  color:var(--muted);
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  font-size:.75rem;
+  margin-right:6px;
 }
 
 .btn{
+  display:inline-block;
   padding:10px 18px;
-  border-radius:30px;
-  border:1px solid var(--border);
-  background:var(--glass);
-  color:var(--text);
-  cursor:pointer;
-  transition:.3s;
+  border-radius:999px;
+  text-decoration:none;
+  margin-top:12px;
+  transition:.25s;
 }
 
-.btn:hover{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+.primary{
+  background:linear-gradient(135deg,var(--accent),#6366f1);
   color:#000;
 }
 
-/* HERO */
-.hero{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:40px;
-  margin-bottom:50px;
+.primary:hover{
+  transform:translateY(-2px);
 }
 
-.hero h1{
-  font-size:48px;
-  font-family:'Space Grotesk';
-  margin-bottom:10px;
-}
-
-.gradient-text{
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.hero p{
-  color:var(--muted);
-  margin-bottom:20px;
-}
-
-.card{
-  background:var(--glass);
-  border:1px solid var(--border);
-  padding:20px;
-  border-radius:20px;
-  backdrop-filter:blur(20px);
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px) scale(1.02);
-}
-
-/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
 }
 
-.section{
-  margin-bottom:40px;
-}
-
-.section h2{
-  margin-bottom:15px;
-  font-size:14px;
-  letter-spacing:2px;
-  color:var(--muted);
-}
-
-ul{
+.list{
+  padding-left:0;
   list-style:none;
 }
 
-li{
-  margin-bottom:8px;
-  font-size:14px;
+.list li{
+  margin:6px 0;
   color:var(--muted);
 }
 
-strong{color:var(--text)}
+.social a{
+  margin-right:8px;
+  color:var(--muted);
+  text-decoration:none;
+}
 
-/* FOOTER */
-.footer{
+footer{
   text-align:center;
+  font-size:.8rem;
   color:var(--muted);
-  font-size:12px;
-  margin-top:30px;
 }
-
-@media(max-width:800px){
-  .hero{grid-template-columns:1fr}
-  .hero h1{font-size:34px}
-}
-
 </style>
 </head>
+
 <body>
+<div class="main">
 
-<div class="container">
+<section>
+<h1>Gaurav Mohapatra</h1>
+<div class="sub">Developer • Maker • Problem Solver</div>
 
-<div class="nav">
-  <div class="logo">GAURAV.dev</div>
-  <button class="btn">Contact</button>
+<div>
+<span class="badge">Class X · DAV Public School</span>
+<span class="badge">Bhubaneswar</span>
 </div>
 
-<div class="hero">
-  <div>
-    <h1>Hi, I'm <span class="gradient-text">Gaurav</span></h1>
-    <p>Student • Developer • Builder creating impactful tech from robotics to web.</p>
-    <button class="btn">View Projects</button>
-  </div>
+<a href="#projects" class="btn primary">View Projects</a>
+</section>
 
-  <div class="card">
-    <h3>Snapshot</h3>
-    <p>6+ Projects<br>Multi-disciplinary<br>Active 2024–26</p>
-  </div>
+<section>
+<h3>Tech Stack</h3>
+<div class="grid">
+<div><i class="fab fa-html5"></i> HTML</div>
+<div><i class="fab fa-css3"></i> CSS</div>
+<div><i class="fab fa-js"></i> JS</div>
+<div><i class="fab fa-python"></i> Python</div>
 </div>
+</section>
 
-<div class="section">
-  <h2>TECH STACK</h2>
-  <div class="grid">
-    <div class="card">HTML • CSS • JS</div>
-    <div class="card">Python • C++</div>
-    <div class="card">Arduino</div>
-  </div>
+<section id="projects">
+<h3>Projects</h3>
+<ul class="list">
+<li><b>ATR XPLORER ROVER:</b> ESP32 rover prototype</li>
+<li><b>Sign Language Glove:</b> Gesture to text</li>
+<li><b>3D Open World Game:</b> GTA-style</li>
+<li><b>Magical Football:</b> Football website</li>
+<li><b>Rubber Tapping Machine:</b> 3D printed tool</li>
+<li><b>Motif Marketplace:</b>A website to sell Pipili Applique art and craft</li>
+<li><b>Invictus OS</b>A lightweight OS to revive old hardware and to reduce e-waste.</li>
+</ul>
+</section>
+
+<section>
+<h3>Achievements</h3>
+<ul class="list">
+<li>KIIT Science Fair Winner</li>
+<li>TCS Inquizitive Top 5</li>
+<li>Silicon Prayas Runner-up</li>
+<li>Silver Award winner in 91st Future Artist Online Art Exbhition and Competition by Manikarnika Art Gallery</li>
+<li>Top 200 Artowrk from 1000 in IAC Art COntest Season 18</li>
+</ul>
+</section>
+
+<section>
+<h3>Contact</h3>
+<div>Email: gauravkrraft@email.com</div>
+<div>Phone: +91 9776866248</div>
+</section>
+
+<footer>
+© 2026 Gaurav Mohapatra
+</footer>
+
 </div>
-
-<div class="section">
-  <h2>PROJECTS</h2>
-  <ul>
-    <li><strong>ATR Rover:</strong> ESP32 robot</li>
-    <li><strong>Sign Glove:</strong> Gesture → text</li>
-    <li><strong>3D Game:</strong> Open world</li>
-    <li><strong>Magical Football:</strong> Website</li>
-  </ul>
-</div>
-
-<div class="section">
-  <h2>ACHIEVEMENTS</h2>
-  <ul>
-    <li>KIIT Science Fair Winner</li>
-    <li>TCS Inquizitive Top 5</li>
-    <li>Silicon Prayas 2nd</li>
-  </ul>
-</div>
-
-<div class="footer">
-  © 2026 Gaurav Mohapatra
-</div>
-
-</div>
-
 </body>
 </html>
