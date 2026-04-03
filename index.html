@@ -1,185 +1,987 @@
-<!-- Ultra-enhanced version: same content, upgraded visuals, smoother animations, micro-interactions -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gaurav Mohapatra | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaurav Mohapatra | Portfolio</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fira+Code&display=swap');
+  <style>
+    :root{
+      --bg:#020617;
+      --bg-soft:#020819;
+      --card:rgba(15,23,42,0.78);
+      --card-soft:rgba(15,23,42,0.9);
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#38bdf8;
+      --accent-soft:rgba(56,189,248,0.12);
+      --accent-strong:#06b6d4;
+      --border:rgba(148,163,184,0.3);
+      --danger:#f97373;
+      --success:#4ade80;
+    }
 
-:root{
-  --bg:#020617;
-  --card:rgba(15,23,42,0.75);
-  --text:#e5e7eb;
-  --muted:#9ca3af;
-  --accent:#38bdf8;
-  --border:rgba(148,163,184,0.25);
-}
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
-*{box-sizing:border-box}
+    html,body{
+      scroll-behavior:smooth;
+    }
 
-body{
-  margin:0;
-  font-family:'Space Grotesk',sans-serif;
-  background:radial-gradient(circle at top,#0f172a,#020617 60%,#000);
-  color:var(--text);
-  display:flex;
-  justify-content:center;
-  padding:2rem 1rem;
-}
+    body{
+      margin:0;
+      font-family:'Space Grotesk',sans-serif;
+      background:
+        radial-gradient(circle at top,#0b1120,#020617 55%,#000 100%);
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      padding:3rem 1.25rem 4rem;
+      min-height:100vh;
+      position:relative;
+      overflow-x:hidden;
+    }
 
-.main{
-  max-width:1000px;
-  width:100%;
-}
+    /* ambient glow blobs */
+    .bg-blob{
+      position:fixed;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:0.35;
+      z-index:-1;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      background:radial-gradient(circle at center,var(--accent),transparent 60%);
+      animation:blob-float 18s ease-in-out infinite alternate;
+    }
+    .bg-blob.right{
+      right:-130px;
+      bottom:-140px;
+      animation-delay:-7s;
+    }
+    .bg-blob.left{
+      left:-150px;
+      top:-160px;
+    }
 
-section{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:1.5rem;
-  margin-bottom:1.2rem;
-  backdrop-filter:blur(18px);
-  transition:all .3s ease;
-}
+    @keyframes blob-float{
+      0%{transform:translate3d(0,0,0) scale(1);}
+      50%{transform:translate3d(30px,10px,0) scale(1.05);}
+      100%{transform:translate3d(-25px,-20px,0) scale(0.96);}
+    }
 
-section:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-}
+    /* subtle CRT lines */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(148,163,184,0.05) 0,
+          rgba(148,163,184,0.05) 1px,
+          transparent 2px,
+          transparent 3px
+        );
+      opacity:.55;
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+      z-index:-1;
+    }
 
-h1{
-  font-size:2.8rem;
-  margin:0.5rem 0;
-}
+    .main{
+      max-width:1040px;
+      width:100%;
+      position:relative;
+    }
 
-.sub{
-  font-family:'Fira Code',monospace;
-  color:var(--muted);
-}
+    /* layout sections */
+    section{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:1.75rem 1.5rem;
+      margin-bottom:1.4rem;
+      backdrop-filter:blur(20px);
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease, background .28s ease;
+      position:relative;
+      overflow:hidden;
+    }
 
-.badge{
-  display:inline-block;
-  padding:4px 10px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  font-size:.75rem;
-  margin-right:6px;
-}
+    section::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top right,rgba(56,189,248,0.16),transparent 65%);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .3s ease;
+      z-index:-1;
+    }
 
-.btn{
-  display:inline-block;
-  padding:10px 18px;
-  border-radius:999px;
-  text-decoration:none;
-  margin-top:12px;
-  transition:.25s;
-}
+    section:hover{
+      transform:translateY(-6px);
+      box-shadow:0 24px 40px rgba(0,0,0,0.7);
+      border-color:rgba(56,189,248,0.55);
+      background:var(--card-soft);
+    }
+    section:hover::after{
+      opacity:1;
+    }
 
-.primary{
-  background:linear-gradient(135deg,var(--accent),#6366f1);
-  color:#000;
-}
+    /* top nav (anchors) */
+    .top-nav{
+      display:flex;
+      justify-content:flex-end;
+      gap:.6rem;
+      margin-bottom:.8rem;
+      font-size:.8rem;
+      font-family:'Fira Code',monospace;
+    }
+    .top-nav a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.35);
+      background:rgba(15,23,42,0.9);
+      transition:.22s;
+      display:inline-flex;
+      align-items:center;
+      gap:.25rem;
+    }
+    .top-nav a i{
+      font-size:.7rem;
+    }
+    .top-nav a:hover{
+      color:var(--accent);
+      border-color:var(--accent);
+      box-shadow:0 0 0 1px rgba(56,189,248,0.4);
+      transform:translateY(-2px);
+    }
 
-.primary:hover{
-  transform:translateY(-2px);
-}
+    /* hero */
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+      gap:1.4rem;
+      align-items:center;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:10px;
-}
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      font-size:.75rem;
+      font-family:'Fira Code',monospace;
+      color:var(--muted);
+    }
+    .chip-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:var(--success);
+      box-shadow:0 0 0 5px rgba(74,222,128,0.22);
+    }
 
-.list{
-  padding-left:0;
-  list-style:none;
-}
+    h1{
+      font-size:2.8rem;
+      margin:.7rem 0 .35rem;
+      letter-spacing:.01em;
+    }
+    .gradient-name{
+      background:linear-gradient(120deg,#38bdf8,#6366f1,#a855f7);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
 
-.list li{
-  margin:6px 0;
-  color:var(--muted);
-}
+    .hero-title-sub{
+      font-size:1rem;
+      color:var(--muted);
+      font-family:'Fira Code',monospace;
+    }
 
-.social a{
-  margin-right:8px;
-  color:var(--muted);
-  text-decoration:none;
-}
+    .hero-summary{
+      margin:.9rem 0 1.1rem;
+      color:var(--text);
+      max-width:36rem;
+      font-size:.95rem;
+    }
 
-footer{
-  text-align:center;
-  font-size:.8rem;
-  color:var(--muted);
-}
-</style>
+    .tag-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.4rem;
+      margin-bottom:1rem;
+    }
+    .tag{
+      font-size:.75rem;
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      color:var(--muted);
+      font-family:'Fira Code',monospace;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 18px;
+      border-radius:999px;
+      text-decoration:none;
+      margin-top:10px;
+      transition:.25s;
+      font-size:.85rem;
+      border:1px solid transparent;
+      cursor:pointer;
+      gap:.45rem;
+      font-family:'Fira Code',monospace;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--accent),#6366f1);
+      color:#020617;
+      box-shadow:0 16px 36px rgba(37,99,235,0.7);
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px) translateX(1px);
+      box-shadow:0 20px 45px rgba(37,99,235,0.9);
+    }
+
+    .btn-ghost{
+      background:rgba(15,23,42,0.9);
+      color:var(--muted);
+      border-color:var(--border);
+    }
+    .btn-ghost:hover{
+      color:var(--accent);
+      border-color:var(--accent);
+      box-shadow:0 0 0 1px rgba(56,189,248,0.4);
+      transform:translateY(-1px);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.6rem;
+    }
+
+    .hero-card{
+      padding:1rem 1rem .9rem;
+      border-radius:16px;
+      border:1px dashed rgba(148,163,184,0.4);
+      background:rgba(15,23,42,0.8);
+      font-size:.85rem;
+      font-family:'Fira Code',monospace;
+      color:var(--muted);
+    }
+    .hero-card h4{
+      margin-top:0;
+      margin-bottom:.4rem;
+      font-size:.85rem;
+      color:var(--text);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+    .hero-card strong{
+      color:var(--accent);
+    }
+
+    /* subsections */
+    h3{
+      margin:0 0 .8rem;
+      font-size:1.15rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .section-subtitle{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:.6rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:.8rem;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.3rem;
+    }
+    .pill{
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.4);
+      font-size:.75rem;
+      color:var(--muted);
+      font-family:'Fira Code',monospace;
+    }
+
+    .skill-item{
+      padding:.6rem .7rem;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,0.35);
+      background:rgba(15,23,42,0.9);
+      font-size:.86rem;
+      display:flex;
+      flex-direction:column;
+      gap:.2rem;
+    }
+    .skill-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:.5rem;
+    }
+    .skill-top span{
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+    }
+    .skill-level{
+      font-size:.7rem;
+      color:var(--muted);
+      font-family:'Fira Code',monospace;
+    }
+    .skill-bar{
+      position:relative;
+      width:100%;
+      height:6px;
+      border-radius:999px;
+      background:rgba(15,23,42,1);
+      overflow:hidden;
+    }
+    .skill-bar-fill{
+      position:absolute;
+      inset:0;
+      width:70%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),#6366f1);
+      box-shadow:0 0 12px rgba(56,189,248,0.8);
+      transform-origin:left;
+      transform:scaleX(0);
+      animation:bar-fill 1.4s ease forwards;
+    }
+    .skill-bar-fill.l80{width:80%;}
+    .skill-bar-fill.l90{width:90%;}
+    .skill-bar-fill.l60{width:60%;}
+
+    @keyframes bar-fill{
+      to{transform:scaleX(1);}
+    }
+
+    /* projects */
+    .list{
+      list-style:none;
+      padding-left:0;
+      margin:0;
+    }
+    .project{
+      padding:.8rem .9rem;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,0.4);
+      background:rgba(15,23,42,0.92);
+      margin-bottom:.6rem;
+      transition:.22s;
+    }
+    .project:last-child{margin-bottom:0;}
+    .project:hover{
+      border-color:var(--accent);
+      box-shadow:0 16px 30px rgba(0,0,0,0.7);
+      transform:translateY(-3px);
+    }
+    .project-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:.6rem;
+      margin-bottom:.25rem;
+    }
+    .project-title{
+      font-weight:600;
+      font-size:.96rem;
+    }
+    .project-tag{
+      font-size:.7rem;
+      padding:2px 7px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      color:var(--muted);
+      font-family:'Fira Code',monospace;
+    }
+    .project p{
+      margin:0;
+      font-size:.85rem;
+      color:var(--muted);
+    }
+    .project-meta{
+      margin-top:.4rem;
+      font-size:.75rem;
+      color:var(--muted);
+      display:flex;
+      flex-wrap:wrap;
+      gap:.4rem;
+      font-family:'Fira Code',monospace;
+    }
+
+    /* achievements timeline */
+    .timeline{
+      position:relative;
+      margin-top:.4rem;
+    }
+    .timeline::before{
+      content:'';
+      position:absolute;
+      left:7px;
+      top:0;
+      bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom,var(--accent),transparent);
+      opacity:.55;
+    }
+    .timeline-item{
+      position:relative;
+      padding-left:1.6rem;
+      margin-bottom:.7rem;
+    }
+    .timeline-bullet{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      left:3px;
+      top:4px;
+      background:var(--accent);
+      box-shadow:0 0 0 4px rgba(56,189,248,0.22);
+    }
+    .timeline-title{
+      font-size:.9rem;
+    }
+    .timeline-meta{
+      font-size:.75rem;
+      color:var(--muted);
+      font-family:'Fira Code',monospace;
+    }
+
+    /* contact & socials */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:2fr 1.3fr;
+      gap:1rem;
+    }
+    .contact-item{
+      margin-bottom:.3rem;
+      font-size:.9rem;
+    }
+    .contact-item span{
+      font-family:'Fira Code',monospace;
+      color:var(--muted);
+      font-size:.8rem;
+    }
+
+    .socials{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-top:.4rem;
+    }
+    .social-link{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.4);
+      background:rgba(15,23,42,0.95);
+      color:var(--muted);
+      text-decoration:none;
+      font-size:.8rem;
+      font-family:'Fira Code',monospace;
+      transition:.22s;
+    }
+    .social-link:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+      box-shadow:0 0 0 1px rgba(56,189,248,0.45);
+      transform:translateY(-1px);
+    }
+    .social-link i{
+      font-size:.9rem;
+    }
+
+    footer{
+      text-align:center;
+      font-size:.8rem;
+      color:var(--muted);
+      margin-top:.4rem;
+      font-family:'Fira Code',monospace;
+    }
+
+    /* responsiveness */
+    @media (max-width:768px){
+      body{
+        padding:2.2rem .9rem 3rem;
+      }
+      .hero{
+        grid-template-columns:1fr;
+      }
+      h1{
+        font-size:2.2rem;
+      }
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+      .top-nav{
+        justify-content:center;
+        flex-wrap:wrap;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<div class="main">
+  <div class="bg-blob left"></div>
+  <div class="bg-blob right"></div>
 
-<section>
-<h1>Gaurav Mohapatra</h1>
-<div class="sub">Developer • Maker • Problem Solver</div>
+  <main class="main">
+    <!-- Floating nav -->
+    <div class="top-nav">
+      <a href="#about"><i class="fa-solid fa-user"></i>about</a>
+      <a href="#skills"><i class="fa-solid fa-code"></i>skills</a>
+      <a href="#projects"><i class="fa-solid fa-diagram-project"></i>projects</a>
+      <a href="#achievements"><i class="fa-solid fa-award"></i>achievements</a>
+      <a href="#contact"><i class="fa-solid fa-envelope"></i>contact</a>
+    </div>
 
-<div>
-<span class="badge">Class X · DAV Public School</span>
-<span class="badge">Bhubaneswar</span>
-</div>
+    <!-- HERO -->
+    <section id="top">
+      <div class="hero">
+        <div>
+          <div class="chip">
+            <span class="chip-dot"></span>
+            <span>Student · Builder · Problem Solver</span>
+          </div>
 
-<a href="#projects" class="btn primary">View Projects</a>
-</section>
+          <h1>
+            Hi, I’m <span class="gradient-name">Gaurav Mohapatra</span>
+          </h1>
+          <div class="hero-title-sub">
+            Class X · DAV Public School, Bhubaneswar · India
+          </div>
 
-<section>
-<h3>Tech Stack</h3>
-<div class="grid">
-<div><i class="fab fa-html5"></i> HTML</div>
-<div><i class="fab fa-css3"></i> CSS</div>
-<div><i class="fab fa-js"></i> JS</div>
-<div><i class="fab fa-python"></i> Python</div>
-</div>
-</section>
+          <p class="hero-summary">
+            I design and build projects that mix hardware, software and creativity:
+            from ESP32 rovers and assistive wearables to 3D printed tools and
+            lightweight operating systems that keep old machines alive.
+          </p>
 
-<section id="projects">
-<h3>Projects</h3>
-<ul class="list">
-<li><b>ATR XPLORER ROVER:</b> ESP32 rover prototype</li>
-<li><b>Sign Language Glove:</b> Gesture to text</li>
-<li><b>3D Open World Game:</b> GTA-style</li>
-<li><b>Magical Football:</b> Football website</li>
-<li><b>Rubber Tapping Machine:</b> 3D printed tool</li>
-<li><b>Motif Marketplace:</b>A website to sell Pipili Applique art and craft</li>
-<li><b>Invictus OS:</b>A lightweight OS to revive old hardware and to reduce e-waste.</li>
-</ul>
-</section>
+          <div class="tag-row">
+            <div class="tag">Embedded &amp; IoT tinkerer</div>
+            <div class="tag">Web &amp; game experiments</div>
+            <div class="tag">STEM fair winner</div>
+            <div class="tag">Art &amp; design enthusiast</div>
+          </div>
 
-<section>
-<h3>Achievements</h3>
-<ul class="list">
-<li>KIIT Science Fair Striver Winner</li>
-<li>TCS Inquizitive Top 5 Audience Prize</li>
-<li>Silicon Prayas Runner-up</li>
-<li>Silver Award winner in 91st Future Artist Online Art Exbhition and Competition by Manikarnika Art Gallery</li>
-<li>Top 200 Artowrk from 1000 in IAC Art COntest Season 18</li>
-<li>ICSO Olympiad 2025-26 2nd in School Rank</li>
-<li>IIO 2024-25 School Rank 3rd</li>
-</ul>
-</section>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fa-solid fa-rocket"></i>
+              View projects
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+              <i class="fa-solid fa-paper-plane"></i>
+              Contact me
+            </a>
+          </div>
+        </div>
 
-<section>
-<h3>Contact</h3>
-<div>Email: gauravkrraft@email.com</div>
-<div>Phone: +91 9776866248</div>
-</section>
+        <div class="hero-card">
+          <h4>Quick profile</h4>
+          <div><strong>Location:</strong> Bhubaneswar, Odisha, India</div>
+          <div><strong>Focus:</strong> Hardware + Web + Creative tech</div>
+          <div><strong>Goal:</strong> Build useful things that actually get used.</div>
+        </div>
+      </div>
+    </section>
 
-<footer>
-© 2026 Gaurav Mohapatra
-</footer>
+    <!-- ABOUT / SUMMARY -->
+    <section id="about">
+      <h3>About</h3>
+      <p class="section-subtitle">
+        A curious mind who loves turning ideas into working prototypes.
+      </p>
+      <div class="grid">
+        <div>
+          <p>
+            I’m a Class X student exploring electronics, programming, and design through
+            hands‑on projects. I like taking everyday problems—like accessibility,
+            automation, or waste—and building small but practical solutions around them.
+          </p>
+          <p style="margin-top:.5rem;">
+            I learn best by doing: wiring sensors, writing code, breaking things,
+            fixing them, and polishing the result into something others can actually use.
+          </p>
+        </div>
+        <div>
+          <div class="pill-row" style="margin-bottom:.4rem;">
+            <span class="pill">Age: 15–16 (student)</span>
+            <span class="pill">School: DAV Public School, Chandrasekharpur</span>
+            <span class="pill">Interested in: robotics, OS, design</span>
+          </div>
+          <p style="font-size:.9rem;color:var(--muted);">
+            If you’re building something interesting in hardware, open‑source,
+            education, or social impact, I’d love to contribute and learn.
+          </p>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- SKILLS -->
+    <section id="skills">
+      <h3>Skills &amp; Tools</h3>
+      <p class="section-subtitle">
+        A growing toolbox for shipping real, working projects.
+      </p>
+
+      <div class="grid">
+        <div>
+          <div class="skill-item">
+            <div class="skill-top">
+              <span><i class="fab fa-html5"></i> HTML &amp; CSS</span>
+              <span class="skill-level">Intermediate</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill l90"></div>
+            </div>
+          </div>
+
+          <div class="skill-item" style="margin-top:.4rem;">
+            <div class="skill-top">
+              <span><i class="fab fa-js"></i> JavaScript</span>
+              <span class="skill-level">Intermediate</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill l80"></div>
+            </div>
+          </div>
+
+          <div class="skill-item" style="margin-top:.4rem;">
+            <div class="skill-top">
+              <span><i class="fab fa-python"></i> Python</span>
+              <span class="skill-level">Comfortable</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill l80"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-item">
+            <div class="skill-top">
+              <span><i class="fa-solid fa-microchip"></i> ESP32 &amp; Arduino</span>
+              <span class="skill-level">Project‑ready</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill l80"></div>
+            </div>
+          </div>
+
+          <div class="skill-item" style="margin-top:.4rem;">
+            <div class="skill-top">
+              <span><i class="fa-solid fa-gamepad"></i> Game engines / 3D</span>
+              <span class="skill-level">Exploring</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill l60"></div>
+            </div>
+          </div>
+
+          <div class="skill-item" style="margin-top:.4rem;">
+            <div class="skill-top">
+              <span><i class="fa-solid fa-drafting-compass"></i> Design &amp; Art</span>
+              <span class="skill-level">Awarded</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill l90"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size:.9rem;margin-bottom:.4rem;">Tech I use</h4>
+          <div class="pill-row">
+            <span class="pill">VS Code</span>
+            <span class="pill">Git &amp; GitHub</span>
+            <span class="pill">ESP32 / Arduino IDE</span>
+            <span class="pill">Figma &amp; basic 3D tools</span>
+            <span class="pill">Linux &amp; lightweight OS</span>
+          </div>
+          <h4 style="font-size:.9rem;margin:.9rem 0 .4rem;">Soft skills</h4>
+          <div class="pill-row">
+            <span class="pill">Self‑learning</span>
+            <span class="pill">Presentation</span>
+            <span class="pill">Team projects</span>
+            <span class="pill">Competition experience</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h3>Projects</h3>
+      <p class="section-subtitle">
+        A snapshot of what I’ve built so far.
+      </p>
+
+      <ul class="list">
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">ATR XPLORER Rover</div>
+            <span class="project-tag">ESP32 · Robotics</span>
+          </div>
+          <p>
+            An ESP32‑powered rover prototype designed for exploration and experimentation.
+            Focused on remote control, sensor integration, and robust chassis design.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-microchip"></i> ESP32, sensors</span>
+            <span><i class="fa-solid fa-wrench"></i> Prototyping &amp; testing</span>
+          </div>
+        </li>
+
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">Sign Language Glove</div>
+            <span class="project-tag">Assistive Tech</span>
+          </div>
+          <p>
+            A wearable glove that converts hand gestures into text, helping bridge
+            communication between sign language users and non‑signers.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-hand-sparkles"></i> Gesture recognition</span>
+            <span><i class="fa-solid fa-universal-access"></i> Accessibility focus</span>
+          </div>
+        </li>
+
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">3D Open World Game</div>
+            <span class="project-tag">Game Dev</span>
+          </div>
+          <p>
+            A GTA‑style 3D open‑world experiment, exploring game design, environment
+            building and basic gameplay mechanics.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-cubes"></i> 3D environments</span>
+            <span><i class="fa-solid fa-brain"></i> Game logic</span>
+          </div>
+        </li>
+
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">Magical Football</div>
+            <span class="project-tag">Web · UI</span>
+          </div>
+          <p>
+            A football‑themed website experiment combining bold visuals, interactive
+            layout and responsive design.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-futbol"></i> Sports‑themed UX</span>
+            <span><i class="fa-solid fa-display"></i> HTML, CSS, JS</span>
+          </div>
+        </li>
+
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">Rubber Tapping Machine</div>
+            <span class="project-tag">Hardware · 3D</span>
+          </div>
+          <p>
+            A 3D‑printed tool concept to automate and standardize rubber tapping,
+            aiming to reduce manual effort and improve consistency.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-gears"></i> 3D printed mechanisms</span>
+            <span><i class="fa-solid fa-industry"></i> Real‑world use case</span>
+          </div>
+        </li>
+
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">Motif Marketplace</div>
+            <span class="project-tag">Web · Culture</span>
+          </div>
+          <p>
+            A marketplace concept to promote and sell Pipili Appliqué art and craft,
+            highlighting local artisans and preserving traditional designs.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-store"></i> E‑commerce concept</span>
+            <span><i class="fa-solid fa-brush"></i> Cultural storytelling</span>
+          </div>
+        </li>
+
+        <li class="project">
+          <div class="project-header">
+            <div class="project-title">Invictus OS</div>
+            <span class="project-tag">OS · Sustainability</span>
+          </div>
+          <p>
+            A lightweight operating system designed to revive old hardware and
+            reduce e‑waste by keeping legacy machines fast, usable and relevant.
+          </p>
+          <div class="project-meta">
+            <span><i class="fa-solid fa-laptop-code"></i> Low‑resource optimization</span>
+            <span><i class="fa-solid fa-recycle"></i> E‑waste reduction</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+      <h3>Achievements</h3>
+      <p class="section-subtitle">
+        Competitions and recognitions that shaped my journey.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">KIIT Science Fair – Striver Winner</div>
+          <div class="timeline-meta">Project‑based competition · Science &amp; innovation</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">TCS Inquizitive – Top 5 Audience Prize</div>
+          <div class="timeline-meta">Technology &amp; general knowledge quiz</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">Silicon Prayas – Runner‑up</div>
+          <div class="timeline-meta">Innovation challenge · Prototype presentation</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">
+            Silver Award – 91st Future Artist Online Art Exhibition &amp; Competition
+          </div>
+          <div class="timeline-meta">Manikarnika Art Gallery · Visual arts</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">Top 200 Artwork out of 1000 – IAC Art Contest Season 18</div>
+          <div class="timeline-meta">International art contest selection</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">ICSO Olympiad 2025‑26 – 2nd in School</div>
+          <div class="timeline-meta">Computer Science Olympiad</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-title">IIO 2024‑25 – 3rd in School</div>
+          <div class="timeline-meta">Informatics / IT Olympiad</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT + SOCIALS -->
+    <section id="contact">
+      <h3>Contact &amp; Socials</h3>
+      <p class="section-subtitle">
+        Open to collaborations, mentorship, and cool opportunities.
+      </p>
+
+      <div class="contact-grid">
+        <div>
+          <div class="contact-item">
+            <span>Email</span><br />
+            <a href="mailto:gauravkrraft@email.com"
+               style="color:var(--accent);text-decoration:none;">
+              gauravkrraft@email.com
+            </a>
+          </div>
+          <div class="contact-item">
+            <span>Phone</span><br />
+            <a href="tel:+919776866248"
+               style="color:var(--text);text-decoration:none;">
+              +91 9776866248
+            </a>
+          </div>
+          <div class="contact-item">
+            <span>Based in</span><br />
+            Bhubaneswar, Odisha, India
+          </div>
+
+          <p style="margin-top:.6rem;font-size:.9rem;color:var(--muted);">
+            The fastest way to reach me is by email. I’m happy to share project details,
+            discuss ideas, or join interesting student‑friendly initiatives.
+          </p>
+        </div>
+
+        <div>
+          <div style="font-size:.85rem;color:var(--muted);margin-bottom:.4rem;">
+            Find me around the web:
+          </div>
+          <div class="socials">
+            <a class="social-link" href="https://github.com/gauravkrraft" target="_blank" rel="noreferrer">
+              <i class="fa-brands fa-github"></i>
+              <span>GitHub</span>
+            </a>
+            <a class="social-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer">
+              <i class="fa-brands fa-linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a class="social-link" href="https://x.com" target="_blank" rel="noreferrer">
+              <i class="fa-brands fa-x-twitter"></i>
+              <span>Twitter / X</span>
+            </a>
+            <a class="social-link" href="https://www.instagram.com" target="_blank" rel="noreferrer">
+              <i class="fa-brands fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+            <a class="social-link" href="https://gauravkrraft.github.io" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-globe"></i>
+              <span>Portfolio site</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Gaurav Mohapatra · Built with HTML, CSS &amp; curiosity.
+    </footer>
+  </main>
 </body>
 </html>
